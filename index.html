@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartão de Natal Personalizado</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #d32f2f;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #d32f2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        .cartao {
+            margin-top: 20px;
+            padding: 40px;
+            background-color: #800020; /* Cor vinho */
+            border: 1px solid #00796b;
+            border-radius: 10px;
+            display: none;
+            width: 80%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .imagem-cartao {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            max-width: 600px; /* Limite máximo de largura */
+        }
+
+        .mensagem-erro {
+            color: red;
+            margin-top: 20px;
+        }
+
+        .arvore-natal {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Feliz Natal e um 2025 de muito sucesso!</h1>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+        <button onclick="gerarCartao()">Gerar Cartão</button>
+        <button onclick="baixarImagem()">Baixar Imagem</button>
+        <div id="cartao" class="cartao"></div>
+        <div id="mensagemErro" class="mensagem-erro"></div>
+        <img src="arvore-natal.jpg" alt="Árvore de Natal" class="arvore-natal">
+    </div>
+    <script>
+        const imagensCartoes = {
+            "Samuel": "cartao-samuel.jpg",
+            "Rodrigo": "cartao-rodrigo.jpg",
+            "Erika": "cartao-erika.jpg",
+            "Renan": "cartao-renan.jpg",
+            "Gustavo Almeida Silva": "cartao-gustavo-almeida.jpg",
+            "Everton": "cartao-everton.jpg",
+            "Alessandra": "cartao-alessandra.jpg",
+            "Camila Gaio Santos": "cartao-camila-gs.jpg",
+            "Sarah": "cartao-sarah.jpg",
+            "Ana": "cartao-ana.jpg",
+            "Gustavo Gomes Aguiar Junior": "cartao-gustavo-gomes.jpg",
+            "Camila Rodrigues da Silva": "cartao-camila-rs.jpg",
+            "Aline": "cartao-aline.jpg",
+            "Henrique": "cartao-henrique.jpg",
+            "Camila Tome da Costa Araujo": "cartao-camila-tca.jpg",
+            "Liliane": "cartao-liliane.jpg",
+            "Amanda": "cartao-amanda.jpg",
+            "Luan": "cartao-luan.jpg",
+            "Jenifer": "cartao-jenifer.jpg",
+            "Gabriel": "cartao-gabriel.jpg",
+            "Gisele": "cartao-gisele.jpg",
+            "Matheus": "cartao-matheus.jpg"
+        };
+
+        function gerarCartao() {
+            const nome = document.getElementById('nome').value;
+            const cartao = document.getElementById('cartao');
+            const mensagemErro = document.getElementById('mensagemErro');
+            const imagemCartao = imagensCartoes[nome];
+            if (imagemCartao) {
+                cartao.innerHTML = `<img src="${imagemCartao}" alt="Cartão de Natal" class="imagem-cartao">`;
+                cartao.style.display = 'block';
+                mensagemErro.innerHTML = '';
+            } else {
+                cartao.style.display = 'none';
+                mensagemErro.innerHTML = 'Ops, parece que o nome digitado não está correto. Se for Camila ou Gustavo, por favor, digite o nome completo. Use letra maiúscula para cada nome. Para os demais, digite apenas o primeiro nome com a primeira letra maiúscula.';
+            }
+        }
+
+        function baixarImagem() {
+            const nome = document.getElementById('nome').value;
+            const imagemCartao = imagensCartoes[nome];
+            if (imagemCartao) {
+                const link = document.createElement('a');
+                link.href = imagemCartao;
+                link.download = 'cartao-natal.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('Nenhum cartão disponível para download.');
+            }
+        }
+    </script>
+</body>
+</html>
